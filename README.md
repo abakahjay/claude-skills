@@ -1,4 +1,4 @@
-﻿# Claude skills
+# Claude skills
 
 Three reusable skills for [Claude](https://claude.ai) and Claude Code, distilled from real projects.
 
@@ -22,3 +22,6 @@ or copy a skill folder into `~/.claude/skills/`.
 
 Some templates mention Ghana-specific services (MoMo, GhanaPost); adapt names and locale to your project.
 
+## Also included
+
+- **linkedin-post** - draft a LinkedIn post in your own voice from a topic or rough notes (skills/linkedin-post).
