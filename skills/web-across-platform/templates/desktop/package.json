@@ -1,0 +1,43 @@
+{
+  "name": "nsoro-desktop",
+  "productName": "Nsoro",
+  "version": "2.2.0",
+  "description": "Nsoro for Windows - share your moments",
+  "author": "Abakah Joshua",
+  "main": "main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win nsis --x64"
+  },
+  "build": {
+    "appId": "com.nsoro.app",
+    "productName": "Nsoro",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "build/icon.png",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Nsoro",
+      "runAfterFinish": true,
+      "artifactName": "Nsoro-Setup.exe"
+    }
+  },
+  "devDependencies": {
+    "electron": "^33.4.11",
+    "electron-builder": "^25.1.8"
+  }
+}

@@ -1,0 +1,28 @@
+<!-- Hand edits to the Bubblewrap-generated app/src/main/AndroidManifest.xml.
+     `bubblewrap update` regenerates the manifest and DROPS these - build with
+     gradlew + apksigner (build-and-sign.sh) once they are in. -->
+
+<!-- 1. Under <manifest>, next to the POST_NOTIFICATIONS permission:
+        Android TV has no touchscreen, and leanback lists the app on the TV home screen.
+        required="false" keeps the same APK installable on phones. -->
+<uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+<uses-feature android:name="android.software.leanback" android:required="false" />
+
+<!-- 2. On <application>: the TV home-screen banner (320x180 dp; ship 640x360 px as
+        res/drawable-xhdpi/tv_banner.png, rendered by generate-icons.mjs). -->
+<application
+    android:banner="@drawable/tv_banner"
+    ... />
+
+<!-- 3. In LauncherActivity's MAIN intent-filter, beside LAUNCHER: -->
+<intent-filter>
+    <action android:name="android.intent.action.MAIN" />
+    <category android:name="android.intent.category.LAUNCHER" />
+    <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+</intent-filter>
+
+<!-- Check after building:
+     aapt dump badging app-release-signed.apk | grep -E "leanback|banner|not-required"
+     -> application: ... banner='res/...png'
+     -> leanback-launchable-activity: name='<pkg>.LauncherActivity'
+     -> uses-feature-not-required: name='android.hardware.touchscreen' / 'android.software.leanback' -->
